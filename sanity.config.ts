@@ -3,6 +3,8 @@ import {structureTool} from 'sanity/structure'
 import {visionTool} from '@sanity/vision'
 import {schemaTypes} from './schemaTypes'
 
+import {ScheduleExcelImporter, ExcelIcon} from './tools/ScheduleExcelImporter'
+
 export default defineConfig({
   name: 'default',
   title: 'LIBN TV',
@@ -11,6 +13,16 @@ export default defineConfig({
   dataset: 'production',
 
   plugins: [structureTool(), visionTool()],
+
+  tools: (prev) => [
+    ...prev,
+    {
+      name: 'excel-schedule-sync',
+      title: 'Excel Schedule Sync',
+      icon: ExcelIcon,
+      component: ScheduleExcelImporter,
+    },
+  ],
 
   schema: {
     types: schemaTypes,
